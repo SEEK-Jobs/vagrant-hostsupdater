@@ -28,7 +28,7 @@ At the moment, the only things you need, are the hostname and a :private_network
 
 If you have multiple network adapters you can specify which hostnames are bound to which IP by passing a `Map[String]Array` mapping the IP of the network to an array of hostnames to create. eg:
 
-    config.vm.multihostsupdater.aliases = {'10.0.0.1' => ['foo.com', 'bar.com'], '10.0.0.2' => ['baz.com', 'bat.com']}
+    config.multihostsupdater.aliases = {'10.0.0.1' => ['foo.com', 'bar.com'], '10.0.0.2' => ['baz.com', 'bat.com']}
 
 This will produce host entries like so:
 
