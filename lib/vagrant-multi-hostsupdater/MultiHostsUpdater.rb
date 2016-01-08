@@ -5,6 +5,9 @@ module VagrantPlugins
 
       def getIps
         ips = []
+        if @machine.config.multihostsupdater.force_ips.is_a?(Array)
+           return @machine.config.multihostsupdater.force_ips
+        end
         @machine.config.vm.networks.each do |network|
           key, options = network[0], network[1]
           ip = options[:ip] if key == :private_network

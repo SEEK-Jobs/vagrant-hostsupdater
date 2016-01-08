@@ -26,14 +26,27 @@ At the moment, the only things you need, are the hostname and a :private_network
 
 ### Multiple private network adapters
 
-If you have multiple network adapters you can specify which hostnames are bound to which IP by passing a `Map[String]Array` mapping the IP of the network to an array of hostnames to create. eg:
+If you have multiple network adapters i.e.:
+
+    devel.vm.network "private_network", ip: 10.0.0.1
+    devel.vm.network "private_network", ip: 10.0.0.2
+
+you can specify which hostnames are bound to which IP by passing a `Map[String]Array` mapping the IP of the network to an array of hostnames to create. eg:
 
     config.multihostsupdater.aliases = {'10.0.0.1' => ['foo.com', 'bar.com'], '10.0.0.2' => ['baz.com', 'bat.com']}
 
 This will produce host entries like so:
 
     10.0.0.1 foo.com
-    10.0.0.2 bar.com
+    10.0.0.1 bar.com
+    10.0.0.2 baz.com
+    10.0.0.2 bat.com
+
+There are some situations in which you don't want Virtualbox to handle multiple private network interfaces. For instance, this is the case of vpn interfaces (like Openvpn tun interfaces).
+
+In these cases you can use the _config.multihostsupdater.force_ips_ setting in this way:
+
+    config.multihostsupdater.force_ips = ['10.0.0.1','10.0.0.2']
 
 ### Remove on a `vagrant suspend`
 
